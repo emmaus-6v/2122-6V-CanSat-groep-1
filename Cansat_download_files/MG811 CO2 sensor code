@@ -1,0 +1,24 @@
+#include "CO2Sensor.h"
+
+CO2Sensor co2Sensor(A0, 0.99, 100);
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("=== Initialized ===");
+  co2Sensor.calibrate();
+}
+
+void loop() {
+  int waarde = co2Sensor.read();
+  Serial.print("CO2 waarde:");
+  Serial.print(waarde);
+  Serial.println("ppm.");
+
+  if(waarde>1000){
+    Serial.print("Wegens gezondheidsredenen ventileren!");
+    
+  }
+
+
+  delay(1000);
+}
